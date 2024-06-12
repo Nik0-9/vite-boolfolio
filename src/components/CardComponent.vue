@@ -7,9 +7,9 @@
             <div class="col-md-8">
                 <div class="card-body">
                     <h5 class="card-title">title: {{ item.title }}</h5>
-                    <p class="card-text" v-html="item.content"></p>
+                    <p class="card-text" v-html="item.content.substring(0, 50) + '...'"></p>
                     
-                    <span class="badge rounded-pill text-bg-warning me-3">{{ item.tipptechnology?.name }}</span>
+                    <span class="badge rounded-pill text-bg-warning me-3">{{ item.technologies?.name }}</span>
                     <RouterLink :to="{ name: 'solo-project', params: { 'slug': item.slug } }" class="btn btn-success">
                         Leggi articolo</RouterLink>
                 </div>
@@ -30,8 +30,7 @@ export default {
     },
     computed: {
         getImg() {
-
-            return this.item.image ? this.store.imgBasePath + this.item.image : '/images/bar-neon.png';
+            return this.item.image ? this.store.imgBasePath + this.item.image : '/img/place-holder.jpg';
         }
     }
 }
