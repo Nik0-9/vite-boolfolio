@@ -4,10 +4,14 @@
       <h1 class="text-center">Project</h1>
       <select name="types" id="types" class="form-select w-25" @change="setParams(1)" v-model="type">
         <option value="">All</option>
-        <option :value="typee.id" v-for="typee in store.types" :key="typee.id" >{{ typee.name }}</option>
+        <option :value="typee.id" v-for="typee in store.types" :key="typee.id">{{ typee.name }}</option>
       </select>
     </div>
     <div class="row">
+      <div class="col-12 col-lg-6" v-if="projects.length < 1">
+        <h4>Non ci sono Progetti per il tipo: {{ selectedType?.name }}</h4>
+      </div>
+
       <div class="col-12 col-lg-6" v-for="project in projects" :key="project.id">
         <CardComponent :item="project" />
       </div>
@@ -22,11 +26,11 @@
 
         <li class="page-item" v-for="page in totalPage" :key="page">
           <a class="page-link" :class="{ 'active': currentPage == page }" @click.prevent="setParams(page)">{{
-          page }}</a>
+        page }}</a>
         </li>
 
         <li class="page-item">
-          <a class="page-link" :class="{ 'disabled': currentPage >= totalPage }" 
+          <a class="page-link" :class="{ 'disabled': currentPage >= totalPage }"
             @click="setParams(currentPage + 1)">Next</a>
         </li>
       </ul>
@@ -56,7 +60,7 @@ export default {
   },
   methods: {
     setParams(numpage) {
-      
+
       this.currentPage = numpage;
       //console.log(this.type);
       this.params = {
@@ -68,7 +72,7 @@ export default {
       this.getAllProjects();
     },
     getAllProjects() {
-      axios.get(this.store.apiBaseUrl + '/projects', { params: this.params } ).then((resp) => {
+      axios.get(this.store.apiBaseUrl + '/projects', { params: this.params }).then((resp) => {
         console.log(resp.data);
         this.projects = resp.data.results.data;
         this.currentPage = resp.data.results.current_page;
@@ -78,14 +82,20 @@ export default {
     }
   },
   computed: {
-        selectedType() {
-            const type = this.store.types.find(type => type.id == this.type);
-            return type ? type.name : '';
-        }
-    },
+    selectedType() {
+      const type = this.store.types.find(type => type.id == this.type);
+      return type ? type.name : '';
+    }
+  },
+  computed: {
+    selectedType() {
+      return this.store.types.find(type => type.id == this.type);
+    }
+  },
   mounted() {
     this.getAllProjects();
   }
+  
 }
 </script>
 
