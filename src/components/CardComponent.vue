@@ -9,7 +9,7 @@
                     <h5 class="card-title">title: {{ item.title }}</h5>
                     <p class="card-text" v-html="item.content.substring(0, 50) + '...'"></p>
                     
-                    <span class="badge rounded-pill text-bg-warning me-3">{{ item.technologies?.name }}</span>
+                    <span class="badge rounded-pill text-bg-warning me-3">{{ item.technology?.name }}</span>
                     <RouterLink :to="{ name: 'solo-project', params: { 'slug': item.slug } }" class="btn btn-success">
                         Leggi articolo</RouterLink>
                 </div>
