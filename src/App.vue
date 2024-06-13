@@ -24,7 +24,7 @@ export default {
   methods: {
     getTypes() {
       axios.get(this.store.apiBaseUrl + '/types', {}).then((resp) => {
-        console.log(resp.data);
+        //console.log(resp.data);
         this.store.types = resp.data.results;
       });
     }

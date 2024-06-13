@@ -46,6 +46,10 @@ export default {
                     name: 'Projects',
                     routeName: 'projects'
                 },
+                {
+                    name: 'Contact',
+                    routeName: 'contact'
+                },
                 // {
                 //   name: 'Categorie',
                 //   routeName: 'categories'
